@@ -33,7 +33,7 @@ arclib/
 
 - NO TODOs in code
 - NO mocks in integration tests
-- 90%+ test coverage
+- 95%+ test coverage per package (not just overall)
 - All crypto via arclib — no direct stdlib crypto calls from consuming projects
 - Cross-validation (Go↔JS↔Kotlin) is a CI gate for crypto and protocol
 - `golangci-lint` and `gosec` must pass with 0 findings

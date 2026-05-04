@@ -3,7 +3,7 @@
 GO := go
 GOTEST := $(GO) test
 GOVET := $(GO) vet
-COVERAGE_MIN := 90
+COVERAGE_MIN := 95
 
 ## Testing
 
