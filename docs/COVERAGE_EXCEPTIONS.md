@@ -16,3 +16,12 @@ Coverage gate: 95% per package. Exceptions must be approved individually.
 **Reason:** These error paths only trigger when the OS cryptographic random source is broken or when Go's standard crypto libraries fail internally. Mocking `crypto/rand` to test these paths would require dependency injection that adds complexity without value — the correct behavior on `crypto/rand` failure is to propagate the error, which the code does.
 
 **Approved:** 2026-05-04
+
+### crypto — NewCompressor (62.5%)
+
+**Affected function:**
+- `NewCompressor` (62.5%) — error paths require `zstd.NewWriter` or `zstd.NewReader` to fail internally, plus the cleanup path (close encoder when decoder creation fails)
+
+**Reason:** The klauspost/zstd library does not return errors with the parameters used (level 3, nil writer). The error handling is defensive but unreachable in practice.
+
+**Approved:** 2026-05-04
