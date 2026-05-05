@@ -1,0 +1,17 @@
+{
+  "name": "@arcan/arclib",
+  "version": "0.1.0-alpha.1",
+  "description": "Arc ecosystem shared crypto library (JS implementation)",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "test": "node --test test/",
+    "test:vectors": "node --test test/cross-validation.test.js"
+  },
+  "keywords": ["crypto", "chacha20", "x25519", "ml-kem", "hkdf", "myclerk"],
+  "author": "Arcan Consulting",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
