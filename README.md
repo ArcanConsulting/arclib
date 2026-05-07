@@ -9,11 +9,11 @@ arclib provides common components used across Arc projects (ArcHub, MyClerk, Arc
 - **Crypto** — ChaCha20-Poly1305, HKDF-SHA256, X25519, ML-KEM-768 (post-quantum), ZSTD
 - **DB** — Database abstraction for PostgreSQL, SQLite, MariaDB/MySQL with encrypted fields
 - **Protocol** — MyClerk Protocol layer (tiers, sessions, fragmentation, VFS)
-- **And more** — Rate limiting, WebAuthn, JSON5, structured logging, TUI framework
+- **And more** — Rate limiting, WebAuthn, JSON5, structured logging, config loader
 
 ## Three Languages
 
-arclib is implemented in Go (reference), JavaScript, and Kotlin. All three pass against shared test vectors via cross-validation.
+arclib is implemented in Go (reference), JavaScript, and Kotlin. All three pass against shared test vectors via cross-validation to guarantee byte-identical output.
 
 ```
 go get arcan-it.de/arclib          # Go
@@ -25,17 +25,16 @@ implementation 'de.arcan.arclib'    # Kotlin
 
 | Component | Go | JS | Kotlin |
 |-----------|----|----|--------|
-| Crypto (SHA-256, CRC, HMAC, ChaCha20, HKDF, X25519, ML-KEM-768, Key Rotation, ZSTD) | Done | In Progress | Planned |
-| DB Abstraction | Planned | — | — |
-| Protocol Layer | Planned | Planned | Planned |
-| Extras (Rate Limiter, WebAuthn, JSON5, TUI, Logging) | Planned | — | — |
+| Crypto (ChaCha20, HKDF, X25519, ML-KEM-768, HMAC, CRC, ZSTD) | Done | Done | Done |
+| DB Abstraction (PostgreSQL, SQLite, MariaDB, encrypted fields) | Done | — | — |
+| Protocol (tiers, codec, extensions, fragmentation, VFS) | Done | Done | Done |
+| Extras (rate limiter, JSON5, logging, config, msgpack, WebAuthn) | Done | — | — |
 
-Current version: **unreleased** (targeting `v0.1.0-alpha.1` after JS + Kotlin crypto cross-validation)
+Current version: **v1.3.0**
 
-## Repository
+## Module path
 
-- **Gitea**: `gitea.rackpc.de/ck/arclib`
-- **Module path**: `arcan-it.de/arclib`
+`arcan-it.de/arclib` — hosted on [GitHub](https://github.com/arcanconsulting/arclib)
 
 ## License
 
