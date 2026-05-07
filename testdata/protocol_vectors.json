@@ -1,0 +1,532 @@
+{
+  "headers": [
+    {
+      "name": "tier0_plaintext_nop",
+      "tier": 0,
+      "opcode": 0,
+      "version": 0,
+      "compressed": false,
+      "fragmented": false,
+      "has_extensions": false,
+      "header_hex": "000000",
+      "header_size": 3
+    },
+    {
+      "name": "tier0_keepalive",
+      "tier": 0,
+      "opcode": 1,
+      "version": 0,
+      "compressed": false,
+      "fragmented": false,
+      "has_extensions": false,
+      "header_hex": "000001",
+      "header_size": 3
+    },
+    {
+      "name": "tier1_checksum",
+      "tier": 1,
+      "opcode": 3,
+      "version": 0,
+      "compressed": false,
+      "fragmented": false,
+      "has_extensions": false,
+      "header_hex": "040003",
+      "header_size": 3
+    },
+    {
+      "name": "tier2_authenticated",
+      "tier": 2,
+      "opcode": 4,
+      "version": 0,
+      "compressed": false,
+      "fragmented": false,
+      "has_extensions": false,
+      "sequence": 42,
+      "header_hex": "0800040000002a",
+      "header_size": 7
+    },
+    {
+      "name": "tier3_encrypted",
+      "tier": 3,
+      "opcode": 16,
+      "version": 0,
+      "compressed": false,
+      "fragmented": false,
+      "has_extensions": false,
+      "sequence": 100,
+      "session_id_hex": "deadbeefcafe0001",
+      "header_hex": "0c001000000064deadbeefcafe0001",
+      "header_size": 15
+    },
+    {
+      "name": "tier4_pfs",
+      "tier": 4,
+      "opcode": 17,
+      "version": 0,
+      "compressed": false,
+      "fragmented": false,
+      "has_extensions": false,
+      "sequence": 7,
+      "session_id_hex": "0102030405060708",
+      "nonce_hex": "0a0b0c0d0e0f101112131415",
+      "key_id": 2864434397,
+      "ecdh_hex": "0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20",
+      "header_hex": "1000110000000701020304050607080a0b0c0d0e0f101112131415aabbccdd0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20",
+      "header_size": 63
+    },
+    {
+      "name": "tier5_max_security",
+      "tier": 5,
+      "opcode": 255,
+      "version": 0,
+      "compressed": false,
+      "fragmented": false,
+      "has_extensions": false,
+      "sequence": 999,
+      "session_id_hex": "ffffffffffffffff",
+      "timestamp_hex": "0000018bcfe56800",
+      "nonce_hex": "ffeeddccbbaa998877665544",
+      "key_id": 305419896,
+      "ecdh_hex": "aabbccddeeff00112233445566778899aabbccddeeff00112233445566778899",
+      "header_hex": "1400ff000003e7ffffffffffffffff0000018bcfe56800ffeeddccbbaa99887766554412345678aabbccddeeff00112233445566778899aabbccddeeff00112233445566778899",
+      "header_size": 71
+    },
+    {
+      "name": "tier0_with_extensions_flag",
+      "tier": 0,
+      "opcode": 3,
+      "version": 0,
+      "compressed": false,
+      "fragmented": false,
+      "has_extensions": true,
+      "header_hex": "800003",
+      "header_size": 3
+    },
+    {
+      "name": "tier0_compressed",
+      "tier": 0,
+      "opcode": 0,
+      "version": 0,
+      "compressed": true,
+      "fragmented": false,
+      "has_extensions": false,
+      "header_hex": "200000",
+      "header_size": 3
+    }
+  ],
+  "extensions": [
+    {
+      "name": "reply_to_only",
+      "reply_to": 42,
+      "hex_data": "000100040000002a",
+      "size": 8
+    },
+    {
+      "name": "target_service_only",
+      "target_service": "chat",
+      "hex_data": "0002000463686174",
+      "size": 8
+    },
+    {
+      "name": "both_extensions",
+      "reply_to": 100,
+      "target_service": "vfs",
+      "hex_data": "000100040000006400020003766673",
+      "size": 15
+    }
+  ],
+  "opcodes": [
+    {
+      "code": 0,
+      "name": "NOP",
+      "category": 0,
+      "operation": 0
+    },
+    {
+      "code": 1,
+      "name": "KEEPALIVE",
+      "category": 0,
+      "operation": 1
+    },
+    {
+      "code": 2,
+      "name": "KEEPALIVE_ACK",
+      "category": 0,
+      "operation": 2
+    },
+    {
+      "code": 3,
+      "name": "SESSION_INIT",
+      "category": 0,
+      "operation": 3
+    },
+    {
+      "code": 4,
+      "name": "SESSION_ACK",
+      "category": 0,
+      "operation": 4
+    },
+    {
+      "code": 5,
+      "name": "SESSION_CLOSE",
+      "category": 0,
+      "operation": 5
+    },
+    {
+      "code": 6,
+      "name": "SESSION_CLOSE_ACK",
+      "category": 0,
+      "operation": 6
+    },
+    {
+      "code": 7,
+      "name": "SESSION_RESUME",
+      "category": 0,
+      "operation": 7
+    },
+    {
+      "code": 8,
+      "name": "SESSION_RESUMED",
+      "category": 0,
+      "operation": 8
+    },
+    {
+      "code": 16,
+      "name": "KEY_EXCHANGE_INIT",
+      "category": 0,
+      "operation": 16
+    },
+    {
+      "code": 17,
+      "name": "KEY_EXCHANGE_RESPONSE",
+      "category": 0,
+      "operation": 17
+    },
+    {
+      "code": 18,
+      "name": "KEY_EXCHANGE_COMPLETE",
+      "category": 0,
+      "operation": 18
+    },
+    {
+      "code": 22,
+      "name": "SESSION_ROTATE",
+      "category": 0,
+      "operation": 22
+    },
+    {
+      "code": 23,
+      "name": "SESSION_REVOKE",
+      "category": 0,
+      "operation": 23
+    },
+    {
+      "code": 255,
+      "name": "ERROR",
+      "category": 0,
+      "operation": 255
+    }
+  ],
+  "error_codes": [
+    {
+      "code": 0,
+      "name": "OK",
+      "is_success": true,
+      "is_client_error": false,
+      "is_server_error": false,
+      "is_federation_error": false,
+      "is_session_error": false,
+      "is_retryable": false
+    },
+    {
+      "code": 1,
+      "name": "OK_ASYNC",
+      "is_success": true,
+      "is_client_error": false,
+      "is_server_error": false,
+      "is_federation_error": false,
+      "is_session_error": false,
+      "is_retryable": false
+    },
+    {
+      "code": 2,
+      "name": "OK_PARTIAL",
+      "is_success": true,
+      "is_client_error": false,
+      "is_server_error": false,
+      "is_federation_error": false,
+      "is_session_error": false,
+      "is_retryable": false
+    },
+    {
+      "code": 16,
+      "name": "BAD_REQUEST",
+      "is_success": false,
+      "is_client_error": true,
+      "is_server_error": false,
+      "is_federation_error": false,
+      "is_session_error": false,
+      "is_retryable": false
+    },
+    {
+      "code": 17,
+      "name": "UNAUTHORIZED",
+      "is_success": false,
+      "is_client_error": true,
+      "is_server_error": false,
+      "is_federation_error": false,
+      "is_session_error": false,
+      "is_retryable": false
+    },
+    {
+      "code": 18,
+      "name": "FORBIDDEN",
+      "is_success": false,
+      "is_client_error": true,
+      "is_server_error": false,
+      "is_federation_error": false,
+      "is_session_error": false,
+      "is_retryable": false
+    },
+    {
+      "code": 19,
+      "name": "NOT_FOUND",
+      "is_success": false,
+      "is_client_error": true,
+      "is_server_error": false,
+      "is_federation_error": false,
+      "is_session_error": false,
+      "is_retryable": false
+    },
+    {
+      "code": 20,
+      "name": "CONFLICT",
+      "is_success": false,
+      "is_client_error": true,
+      "is_server_error": false,
+      "is_federation_error": false,
+      "is_session_error": false,
+      "is_retryable": false
+    },
+    {
+      "code": 21,
+      "name": "GONE",
+      "is_success": false,
+      "is_client_error": true,
+      "is_server_error": false,
+      "is_federation_error": false,
+      "is_session_error": false,
+      "is_retryable": false
+    },
+    {
+      "code": 22,
+      "name": "TOO_LARGE",
+      "is_success": false,
+      "is_client_error": true,
+      "is_server_error": false,
+      "is_federation_error": false,
+      "is_session_error": false,
+      "is_retryable": false
+    },
+    {
+      "code": 23,
+      "name": "INVALID_TIER",
+      "is_success": false,
+      "is_client_error": true,
+      "is_server_error": false,
+      "is_federation_error": false,
+      "is_session_error": false,
+      "is_retryable": false
+    },
+    {
+      "code": 24,
+      "name": "INVALID_VERSION",
+      "is_success": false,
+      "is_client_error": true,
+      "is_server_error": false,
+      "is_federation_error": false,
+      "is_session_error": false,
+      "is_retryable": false
+    },
+    {
+      "code": 25,
+      "name": "INVALID_SEQUENCE",
+      "is_success": false,
+      "is_client_error": true,
+      "is_server_error": false,
+      "is_federation_error": false,
+      "is_session_error": false,
+      "is_retryable": false
+    },
+    {
+      "code": 26,
+      "name": "RATE_LIMITED",
+      "is_success": false,
+      "is_client_error": true,
+      "is_server_error": false,
+      "is_federation_error": false,
+      "is_session_error": false,
+      "is_retryable": false
+    },
+    {
+      "code": 32,
+      "name": "INTERNAL_ERROR",
+      "is_success": false,
+      "is_client_error": false,
+      "is_server_error": true,
+      "is_federation_error": false,
+      "is_session_error": false,
+      "is_retryable": false
+    },
+    {
+      "code": 33,
+      "name": "SERVICE_UNAVAILABLE",
+      "is_success": false,
+      "is_client_error": false,
+      "is_server_error": true,
+      "is_federation_error": false,
+      "is_session_error": false,
+      "is_retryable": true
+    },
+    {
+      "code": 34,
+      "name": "TIMEOUT",
+      "is_success": false,
+      "is_client_error": false,
+      "is_server_error": true,
+      "is_federation_error": false,
+      "is_session_error": false,
+      "is_retryable": true
+    },
+    {
+      "code": 35,
+      "name": "OVERLOADED",
+      "is_success": false,
+      "is_client_error": false,
+      "is_server_error": true,
+      "is_federation_error": false,
+      "is_session_error": false,
+      "is_retryable": true
+    },
+    {
+      "code": 36,
+      "name": "NOT_IMPLEMENTED",
+      "is_success": false,
+      "is_client_error": false,
+      "is_server_error": true,
+      "is_federation_error": false,
+      "is_session_error": false,
+      "is_retryable": false
+    },
+    {
+      "code": 48,
+      "name": "NODE_UNREACHABLE",
+      "is_success": false,
+      "is_client_error": false,
+      "is_server_error": false,
+      "is_federation_error": true,
+      "is_session_error": false,
+      "is_retryable": true
+    },
+    {
+      "code": 49,
+      "name": "CLUSTER_PARTITION",
+      "is_success": false,
+      "is_client_error": false,
+      "is_server_error": false,
+      "is_federation_error": true,
+      "is_session_error": false,
+      "is_retryable": true
+    },
+    {
+      "code": 50,
+      "name": "SYNC_FAILED",
+      "is_success": false,
+      "is_client_error": false,
+      "is_server_error": false,
+      "is_federation_error": true,
+      "is_session_error": false,
+      "is_retryable": false
+    },
+    {
+      "code": 51,
+      "name": "FEDERATION_DENIED",
+      "is_success": false,
+      "is_client_error": false,
+      "is_server_error": false,
+      "is_federation_error": true,
+      "is_session_error": false,
+      "is_retryable": false
+    },
+    {
+      "code": 52,
+      "name": "VERSION_MISMATCH",
+      "is_success": false,
+      "is_client_error": false,
+      "is_server_error": false,
+      "is_federation_error": true,
+      "is_session_error": false,
+      "is_retryable": false
+    },
+    {
+      "code": 53,
+      "name": "QUORUM_UNAVAILABLE",
+      "is_success": false,
+      "is_client_error": false,
+      "is_server_error": false,
+      "is_federation_error": true,
+      "is_session_error": false,
+      "is_retryable": true
+    },
+    {
+      "code": 64,
+      "name": "SESSION_EXPIRED",
+      "is_success": false,
+      "is_client_error": false,
+      "is_server_error": false,
+      "is_federation_error": false,
+      "is_session_error": true,
+      "is_retryable": false
+    },
+    {
+      "code": 65,
+      "name": "SESSION_INVALID",
+      "is_success": false,
+      "is_client_error": false,
+      "is_server_error": false,
+      "is_federation_error": false,
+      "is_session_error": true,
+      "is_retryable": false
+    },
+    {
+      "code": 66,
+      "name": "KEY_EXPIRED",
+      "is_success": false,
+      "is_client_error": false,
+      "is_server_error": false,
+      "is_federation_error": false,
+      "is_session_error": true,
+      "is_retryable": false
+    },
+    {
+      "code": 67,
+      "name": "HANDSHAKE_FAILED",
+      "is_success": false,
+      "is_client_error": false,
+      "is_server_error": false,
+      "is_federation_error": false,
+      "is_session_error": true,
+      "is_retryable": false
+    },
+    {
+      "code": 68,
+      "name": "REPLAY_DETECTED",
+      "is_success": false,
+      "is_client_error": false,
+      "is_server_error": false,
+      "is_federation_error": false,
+      "is_session_error": true,
+      "is_retryable": false
+    }
+  ]
+}

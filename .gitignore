@@ -1,0 +1,36 @@
+# Binaries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test
+*.test
+*.out
+*_coverage.*
+coverage.html
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build
+/bin/
+/dist/
+
+# Node (for js/)
+js/node_modules/
+js/package-lock.json
+
+# Kotlin (for kt/)
+kt/.gradle/
+kt/build/
+kt/local.properties

@@ -1,0 +1,81 @@
+{
+  "sha256": [
+    {
+      "input": "",
+      "hex_input": "",
+      "output": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "input": "hello",
+      "hex_input": "68656c6c6f",
+      "output": "2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824"
+    },
+    {
+      "input": "abc",
+      "hex_input": "616263",
+      "output": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"
+    }
+  ],
+  "crc16_ibm": {
+    "polynomial": "0xA001",
+    "initial": "0xFFFF",
+    "vectors": [
+      {
+        "input": "123456789",
+        "hex_input": "313233343536373839",
+        "output": "0x4B37"
+      },
+      {
+        "input": "",
+        "hex_input": "",
+        "output": "0xFFFF"
+      },
+      {
+        "input": "\u0000",
+        "hex_input": "00",
+        "output": "0x40BF"
+      }
+    ]
+  },
+  "crc32_ieee": {
+    "polynomial": "0x04C11DB7",
+    "vectors": [
+      {
+        "input": "123456789",
+        "hex_input": "313233343536373839",
+        "output": "0xCBF43926"
+      },
+      {
+        "input": "",
+        "hex_input": "",
+        "output": "0x00000000"
+      },
+      {
+        "input": "\u0000",
+        "hex_input": "00",
+        "output": "0xD202EF8D"
+      }
+    ]
+  },
+  "hmac_sha256": {
+    "vectors": [
+      {
+        "name": "RFC 4231 Test Case 1",
+        "key": "0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b",
+        "data": "4869205468657265",
+        "output": "b0344c61d8db38535ca8afceaf0bf12b881dc200c9833da726e9376c2e32cff7"
+      },
+      {
+        "name": "RFC 4231 Test Case 2",
+        "key": "4a656665",
+        "data": "7768617420646f2079612077616e7420666f72206e6f7468696e673f",
+        "output": "5bdcc146bf60754e6a042426089575c75a003f089d2739839dec58b964ec3843"
+      }
+    ],
+    "truncation": {
+      "description": "MyClerk Protocol Tier 2 uses 8-byte truncated HMAC-SHA256",
+      "truncation_bytes": 8,
+      "note": "Truncated output is the first N bytes of the full HMAC"
+    }
+  }
+}
