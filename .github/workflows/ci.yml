@@ -41,7 +41,7 @@ jobs:
         with:
           node-version: '22'
       - name: Run JS cross-validation
-        run: cd js && node --test test/
+        run: cd js && node --test 'test/*.test.js'
 
   test-kt:
     runs-on: ubuntu-latest
