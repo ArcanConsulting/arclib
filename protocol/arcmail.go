@@ -21,6 +21,9 @@ const (
 	OpArcMailMessagePage     OpCode = 0x3122 // Messages.Page
 	OpArcMailMessageSetFlags OpCode = 0x3123 // Messages.SetFlags
 	OpArcMailMessageBody     OpCode = 0x3124 // Messages.Body
+
+	// Transport control (0x31Fx).
+	OpArcMailEvent OpCode = 0x31F0 // Server->client push event (carries no ExtReplyTo)
 )
 
 func init() {
@@ -32,6 +35,7 @@ func init() {
 		OpArcMailMessagePage:     "ARCMAIL_MESSAGE_PAGE",
 		OpArcMailMessageSetFlags: "ARCMAIL_MESSAGE_SETFLAGS",
 		OpArcMailMessageBody:     "ARCMAIL_MESSAGE_BODY",
+		OpArcMailEvent:           "ARCMAIL_EVENT",
 	})
 }
 
