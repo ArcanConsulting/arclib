@@ -7,7 +7,7 @@ package protocol
 // top-level application range, following the SilverWidget Market Data (0x30)
 // precedent rather than squatting in an already-assigned range. See
 // draft-myclerk-arcmail (the dedicated ArcMail section of the MyClerk Protocol).
-// Sub-blocks: 0x310x Accounts, 0x311x Mailboxes, 0x312x Messages.
+// Sub-blocks: 0x310x Accounts, 0x311x Mailboxes, 0x312x Messages, 0x313x Outbox.
 const (
 	// Accounts (0x310x).
 	OpArcMailAccountList OpCode = 0x3101 // Accounts.List
@@ -22,6 +22,12 @@ const (
 	OpArcMailMessageSetFlags OpCode = 0x3123 // Messages.SetFlags
 	OpArcMailMessageBody     OpCode = 0x3124 // Messages.Body
 
+	// Outbox (0x313x): the send queue (D-8-3).
+	OpArcMailOutboxSend   OpCode = 0x3130 // Outbox.Send (enqueue an outgoing message)
+	OpArcMailOutboxList   OpCode = 0x3131 // Outbox.List
+	OpArcMailOutboxRetry  OpCode = 0x3132 // Outbox.Retry (requeue a failed item)
+	OpArcMailOutboxCancel OpCode = 0x3133 // Outbox.Cancel (discard a queued item)
+
 	// Transport control (0x31Fx).
 	OpArcMailEvent OpCode = 0x31F0 // Server->client push event (carries no ExtReplyTo)
 )
@@ -35,6 +41,10 @@ func init() {
 		OpArcMailMessagePage:     "ARCMAIL_MESSAGE_PAGE",
 		OpArcMailMessageSetFlags: "ARCMAIL_MESSAGE_SETFLAGS",
 		OpArcMailMessageBody:     "ARCMAIL_MESSAGE_BODY",
+		OpArcMailOutboxSend:      "ARCMAIL_OUTBOX_SEND",
+		OpArcMailOutboxList:      "ARCMAIL_OUTBOX_LIST",
+		OpArcMailOutboxRetry:     "ARCMAIL_OUTBOX_RETRY",
+		OpArcMailOutboxCancel:    "ARCMAIL_OUTBOX_CANCEL",
 		OpArcMailEvent:           "ARCMAIL_EVENT",
 	})
 }
