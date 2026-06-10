@@ -1,13 +1,9 @@
 plugins {
-    kotlin("jvm") version "1.9.24"
+    kotlin("jvm")
 }
 
 group = "de.arcan.arclib"
 version = "0.1.0-alpha.1"
-
-repositories {
-    mavenCentral()
-}
 
 dependencies {
     testImplementation(kotlin("test"))
