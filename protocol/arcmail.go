@@ -28,6 +28,9 @@ const (
 	OpArcMailOutboxRetry  OpCode = 0x3132 // Outbox.Retry (requeue a failed item)
 	OpArcMailOutboxCancel OpCode = 0x3133 // Outbox.Cancel (discard a queued item)
 
+	// Identities (0x314x): sending identities / From addresses (D-4-2).
+	OpArcMailIdentityList OpCode = 0x3140 // Identities.List
+
 	// Transport control (0x31Fx).
 	OpArcMailEvent OpCode = 0x31F0 // Server->client push event (carries no ExtReplyTo)
 )
@@ -45,6 +48,7 @@ func init() {
 		OpArcMailOutboxList:      "ARCMAIL_OUTBOX_LIST",
 		OpArcMailOutboxRetry:     "ARCMAIL_OUTBOX_RETRY",
 		OpArcMailOutboxCancel:    "ARCMAIL_OUTBOX_CANCEL",
+		OpArcMailIdentityList:    "ARCMAIL_IDENTITY_LIST",
 		OpArcMailEvent:           "ARCMAIL_EVENT",
 	})
 }
