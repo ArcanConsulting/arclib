@@ -10,6 +10,7 @@ require (
 	github.com/mattn/go-sqlite3 v1.14.44
 	github.com/vmihailenco/msgpack/v5 v5.4.1
 	golang.org/x/crypto v0.50.0
+	lukechampine.com/adiantum v1.1.1
 )
 
 require (
