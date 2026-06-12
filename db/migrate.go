@@ -181,7 +181,8 @@ func (m *Migrator) Up(ctx context.Context) error {
 				return fmt.Errorf("db: migrate up %s (%s): %w", mig.Version, mig.Name, err)
 			}
 			_, err := tx.ExecContext(ctx,
-				fmt.Sprintf("INSERT INTO %s (version, name) VALUES (?, ?)", m.table),
+				fmt.Sprintf("INSERT INTO %s (version, name) VALUES (%s)",
+					m.table, Placeholders(2, m.conn.IsPostgres())),
 				mig.Version, mig.Name)
 			return err
 		}); err != nil {
@@ -225,7 +226,8 @@ func (m *Migrator) Down(ctx context.Context) error {
 			return fmt.Errorf("db: migrate down %s (%s): %w", last.Version, last.Name, err)
 		}
 		_, err := tx.ExecContext(ctx,
-			fmt.Sprintf("DELETE FROM %s WHERE version = ?", m.table),
+			fmt.Sprintf("DELETE FROM %s WHERE version = %s",
+				m.table, Placeholders(1, m.conn.IsPostgres())),
 			last.Version)
 		return err
 	})
