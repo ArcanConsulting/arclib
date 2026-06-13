@@ -8,7 +8,7 @@ package protocol
 // precedent rather than squatting in an already-assigned range. See
 // draft-myclerk-arcmail (the dedicated ArcMail section of the MyClerk Protocol).
 // Sub-blocks: 0x310x Accounts, 0x311x Mailboxes, 0x312x Messages, 0x313x Outbox,
-// 0x314x Identities, 0x315x Drafts.
+// 0x314x Identities, 0x315x Drafts, 0x316x Crypto.
 const (
 	// Accounts (0x310x).
 	OpArcMailAccountList OpCode = 0x3101 // Accounts.List
@@ -38,6 +38,10 @@ const (
 	OpArcMailDraftSave   OpCode = 0x3150 // Drafts.Save (APPEND to the Drafts mailbox)
 	OpArcMailDraftDelete OpCode = 0x3151 // Drafts.Delete (UID-EXPUNGE a draft)
 
+	// Crypto (0x316x): message-level crypto key management (PGP/S-MIME, D-10-11).
+	OpArcMailCryptoImportKey OpCode = 0x3160 // Crypto.ImportKey (import a PGP key / S-MIME cert or identity)
+	OpArcMailCryptoListKeys  OpCode = 0x3161 // Crypto.ListKeys (enumerate known keys)
+
 	// Transport control (0x31Fx).
 	OpArcMailEvent OpCode = 0x31F0 // Server->client push event (carries no ExtReplyTo)
 )
@@ -60,6 +64,8 @@ func init() {
 		OpArcMailIdentitySelectReply: "ARCMAIL_IDENTITY_SELECT_REPLY",
 		OpArcMailDraftSave:           "ARCMAIL_DRAFT_SAVE",
 		OpArcMailDraftDelete:         "ARCMAIL_DRAFT_DELETE",
+		OpArcMailCryptoImportKey:     "ARCMAIL_CRYPTO_IMPORT_KEY",
+		OpArcMailCryptoListKeys:      "ARCMAIL_CRYPTO_LIST_KEYS",
 		OpArcMailEvent:               "ARCMAIL_EVENT",
 	})
 }

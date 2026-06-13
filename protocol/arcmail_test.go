@@ -14,6 +14,8 @@ func TestArcMailOpCodesRegistered(t *testing.T) {
 		{OpArcMailMessagePage, "ARCMAIL_MESSAGE_PAGE"},
 		{OpArcMailMessageSetFlags, "ARCMAIL_MESSAGE_SETFLAGS"},
 		{OpArcMailMessageBody, "ARCMAIL_MESSAGE_BODY"},
+		{OpArcMailCryptoImportKey, "ARCMAIL_CRYPTO_IMPORT_KEY"},
+		{OpArcMailCryptoListKeys, "ARCMAIL_CRYPTO_LIST_KEYS"},
 	}
 
 	for _, tt := range tests {
