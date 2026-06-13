@@ -7,7 +7,8 @@ package protocol
 // top-level application range, following the SilverWidget Market Data (0x30)
 // precedent rather than squatting in an already-assigned range. See
 // draft-myclerk-arcmail (the dedicated ArcMail section of the MyClerk Protocol).
-// Sub-blocks: 0x310x Accounts, 0x311x Mailboxes, 0x312x Messages, 0x313x Outbox.
+// Sub-blocks: 0x310x Accounts, 0x311x Mailboxes, 0x312x Messages, 0x313x Outbox,
+// 0x314x Identities, 0x315x Drafts.
 const (
 	// Accounts (0x310x).
 	OpArcMailAccountList OpCode = 0x3101 // Accounts.List
@@ -33,6 +34,10 @@ const (
 	OpArcMailIdentityList        OpCode = 0x3140 // Identities.List
 	OpArcMailIdentitySelectReply OpCode = 0x3141 // Identities.SelectReply (Auto-From, D-4-6)
 
+	// Drafts (0x315x): unsent messages in the server-side IMAP Drafts folder (D-8-12).
+	OpArcMailDraftSave   OpCode = 0x3150 // Drafts.Save (APPEND to the Drafts mailbox)
+	OpArcMailDraftDelete OpCode = 0x3151 // Drafts.Delete (UID-EXPUNGE a draft)
+
 	// Transport control (0x31Fx).
 	OpArcMailEvent OpCode = 0x31F0 // Server->client push event (carries no ExtReplyTo)
 )
@@ -53,6 +58,8 @@ func init() {
 		OpArcMailOutboxCancel:        "ARCMAIL_OUTBOX_CANCEL",
 		OpArcMailIdentityList:        "ARCMAIL_IDENTITY_LIST",
 		OpArcMailIdentitySelectReply: "ARCMAIL_IDENTITY_SELECT_REPLY",
+		OpArcMailDraftSave:           "ARCMAIL_DRAFT_SAVE",
+		OpArcMailDraftDelete:         "ARCMAIL_DRAFT_DELETE",
 		OpArcMailEvent:               "ARCMAIL_EVENT",
 	})
 }
