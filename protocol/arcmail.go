@@ -41,6 +41,7 @@ const (
 	// Crypto (0x316x): message-level crypto key management (PGP/S-MIME, D-10-11).
 	OpArcMailCryptoImportKey OpCode = 0x3160 // Crypto.ImportKey (import a PGP key / S-MIME cert or identity)
 	OpArcMailCryptoListKeys  OpCode = 0x3161 // Crypto.ListKeys (enumerate known keys)
+	OpArcMailCryptoDeleteKey OpCode = 0x3162 // Crypto.DeleteKey (remove a key by fingerprint, D-10-13)
 
 	// Transport control (0x31Fx).
 	OpArcMailEvent OpCode = 0x31F0 // Server->client push event (carries no ExtReplyTo)
@@ -66,6 +67,7 @@ func init() {
 		OpArcMailDraftDelete:         "ARCMAIL_DRAFT_DELETE",
 		OpArcMailCryptoImportKey:     "ARCMAIL_CRYPTO_IMPORT_KEY",
 		OpArcMailCryptoListKeys:      "ARCMAIL_CRYPTO_LIST_KEYS",
+		OpArcMailCryptoDeleteKey:     "ARCMAIL_CRYPTO_DELETE_KEY",
 		OpArcMailEvent:               "ARCMAIL_EVENT",
 	})
 }

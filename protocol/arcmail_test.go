@@ -16,6 +16,7 @@ func TestArcMailOpCodesRegistered(t *testing.T) {
 		{OpArcMailMessageBody, "ARCMAIL_MESSAGE_BODY"},
 		{OpArcMailCryptoImportKey, "ARCMAIL_CRYPTO_IMPORT_KEY"},
 		{OpArcMailCryptoListKeys, "ARCMAIL_CRYPTO_LIST_KEYS"},
+		{OpArcMailCryptoDeleteKey, "ARCMAIL_CRYPTO_DELETE_KEY"},
 	}
 
 	for _, tt := range tests {
