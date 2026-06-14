@@ -23,6 +23,7 @@ const (
 	OpArcMailMessageSetFlags    OpCode = 0x3123 // Messages.SetFlags
 	OpArcMailMessageBody        OpCode = 0x3124 // Messages.Body
 	OpArcMailMessageAttachments OpCode = 0x3125 // Messages.Attachments (forward, D-8-11)
+	OpArcMailMessageAttachment  OpCode = 0x3126 // Messages.Attachment (open one + scan, D-10-5)
 
 	// Outbox (0x313x): the send queue (D-8-3).
 	OpArcMailOutboxSend   OpCode = 0x3130 // Outbox.Send (enqueue an outgoing message)
@@ -57,6 +58,7 @@ func init() {
 		OpArcMailMessageSetFlags:     "ARCMAIL_MESSAGE_SETFLAGS",
 		OpArcMailMessageBody:         "ARCMAIL_MESSAGE_BODY",
 		OpArcMailMessageAttachments:  "ARCMAIL_MESSAGE_ATTACHMENTS",
+		OpArcMailMessageAttachment:   "ARCMAIL_MESSAGE_ATTACHMENT",
 		OpArcMailOutboxSend:          "ARCMAIL_OUTBOX_SEND",
 		OpArcMailOutboxList:          "ARCMAIL_OUTBOX_LIST",
 		OpArcMailOutboxRetry:         "ARCMAIL_OUTBOX_RETRY",
