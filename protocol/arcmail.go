@@ -43,6 +43,7 @@ const (
 	OpArcMailCryptoImportKey OpCode = 0x3160 // Crypto.ImportKey (import a PGP key / S-MIME cert or identity)
 	OpArcMailCryptoListKeys  OpCode = 0x3161 // Crypto.ListKeys (enumerate known keys)
 	OpArcMailCryptoDeleteKey OpCode = 0x3162 // Crypto.DeleteKey (remove a key by fingerprint, D-10-13)
+	OpArcMailCryptoSetTrust  OpCode = 0x3163 // Crypto.SetCertTrust (mark an S/MIME cert user-trusted, D-10-19)
 
 	// Transport control (0x31Fx).
 	OpArcMailEvent OpCode = 0x31F0 // Server->client push event (carries no ExtReplyTo)
@@ -70,6 +71,7 @@ func init() {
 		OpArcMailCryptoImportKey:     "ARCMAIL_CRYPTO_IMPORT_KEY",
 		OpArcMailCryptoListKeys:      "ARCMAIL_CRYPTO_LIST_KEYS",
 		OpArcMailCryptoDeleteKey:     "ARCMAIL_CRYPTO_DELETE_KEY",
+		OpArcMailCryptoSetTrust:      "ARCMAIL_CRYPTO_SET_TRUST",
 		OpArcMailEvent:               "ARCMAIL_EVENT",
 	})
 }
