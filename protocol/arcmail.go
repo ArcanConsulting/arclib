@@ -40,10 +40,11 @@ const (
 	OpArcMailDraftDelete OpCode = 0x3151 // Drafts.Delete (UID-EXPUNGE a draft)
 
 	// Crypto (0x316x): message-level crypto key management (PGP/S-MIME, D-10-11).
-	OpArcMailCryptoImportKey OpCode = 0x3160 // Crypto.ImportKey (import a PGP key / S-MIME cert or identity)
-	OpArcMailCryptoListKeys  OpCode = 0x3161 // Crypto.ListKeys (enumerate known keys)
-	OpArcMailCryptoDeleteKey OpCode = 0x3162 // Crypto.DeleteKey (remove a key by fingerprint, D-10-13)
-	OpArcMailCryptoSetTrust  OpCode = 0x3163 // Crypto.SetCertTrust (mark an S/MIME cert user-trusted, D-10-19)
+	OpArcMailCryptoImportKey       OpCode = 0x3160 // Crypto.ImportKey (import a PGP key / S-MIME cert or identity)
+	OpArcMailCryptoListKeys        OpCode = 0x3161 // Crypto.ListKeys (enumerate known keys)
+	OpArcMailCryptoDeleteKey       OpCode = 0x3162 // Crypto.DeleteKey (remove a key by fingerprint, D-10-13)
+	OpArcMailCryptoSetTrust        OpCode = 0x3163 // Crypto.SetCertTrust (mark an S/MIME cert user-trusted, D-10-19)
+	OpArcMailCryptoRecipientStatus OpCode = 0x3164 // Crypto.RecipientKeyStatus (per-recipient encryption-key availability, D-10-21)
 
 	// Transport control (0x31Fx).
 	OpArcMailEvent OpCode = 0x31F0 // Server->client push event (carries no ExtReplyTo)
@@ -51,28 +52,29 @@ const (
 
 func init() {
 	RegisterOpCodes("arcmail", map[OpCode]string{
-		OpArcMailAccountList:         "ARCMAIL_ACCOUNT_LIST",
-		OpArcMailMailboxList:         "ARCMAIL_MAILBOX_LIST",
-		OpArcMailMessageGet:          "ARCMAIL_MESSAGE_GET",
-		OpArcMailMessageList:         "ARCMAIL_MESSAGE_LIST",
-		OpArcMailMessagePage:         "ARCMAIL_MESSAGE_PAGE",
-		OpArcMailMessageSetFlags:     "ARCMAIL_MESSAGE_SETFLAGS",
-		OpArcMailMessageBody:         "ARCMAIL_MESSAGE_BODY",
-		OpArcMailMessageAttachments:  "ARCMAIL_MESSAGE_ATTACHMENTS",
-		OpArcMailMessageAttachment:   "ARCMAIL_MESSAGE_ATTACHMENT",
-		OpArcMailOutboxSend:          "ARCMAIL_OUTBOX_SEND",
-		OpArcMailOutboxList:          "ARCMAIL_OUTBOX_LIST",
-		OpArcMailOutboxRetry:         "ARCMAIL_OUTBOX_RETRY",
-		OpArcMailOutboxCancel:        "ARCMAIL_OUTBOX_CANCEL",
-		OpArcMailIdentityList:        "ARCMAIL_IDENTITY_LIST",
-		OpArcMailIdentitySelectReply: "ARCMAIL_IDENTITY_SELECT_REPLY",
-		OpArcMailDraftSave:           "ARCMAIL_DRAFT_SAVE",
-		OpArcMailDraftDelete:         "ARCMAIL_DRAFT_DELETE",
-		OpArcMailCryptoImportKey:     "ARCMAIL_CRYPTO_IMPORT_KEY",
-		OpArcMailCryptoListKeys:      "ARCMAIL_CRYPTO_LIST_KEYS",
-		OpArcMailCryptoDeleteKey:     "ARCMAIL_CRYPTO_DELETE_KEY",
-		OpArcMailCryptoSetTrust:      "ARCMAIL_CRYPTO_SET_TRUST",
-		OpArcMailEvent:               "ARCMAIL_EVENT",
+		OpArcMailAccountList:           "ARCMAIL_ACCOUNT_LIST",
+		OpArcMailMailboxList:           "ARCMAIL_MAILBOX_LIST",
+		OpArcMailMessageGet:            "ARCMAIL_MESSAGE_GET",
+		OpArcMailMessageList:           "ARCMAIL_MESSAGE_LIST",
+		OpArcMailMessagePage:           "ARCMAIL_MESSAGE_PAGE",
+		OpArcMailMessageSetFlags:       "ARCMAIL_MESSAGE_SETFLAGS",
+		OpArcMailMessageBody:           "ARCMAIL_MESSAGE_BODY",
+		OpArcMailMessageAttachments:    "ARCMAIL_MESSAGE_ATTACHMENTS",
+		OpArcMailMessageAttachment:     "ARCMAIL_MESSAGE_ATTACHMENT",
+		OpArcMailOutboxSend:            "ARCMAIL_OUTBOX_SEND",
+		OpArcMailOutboxList:            "ARCMAIL_OUTBOX_LIST",
+		OpArcMailOutboxRetry:           "ARCMAIL_OUTBOX_RETRY",
+		OpArcMailOutboxCancel:          "ARCMAIL_OUTBOX_CANCEL",
+		OpArcMailIdentityList:          "ARCMAIL_IDENTITY_LIST",
+		OpArcMailIdentitySelectReply:   "ARCMAIL_IDENTITY_SELECT_REPLY",
+		OpArcMailDraftSave:             "ARCMAIL_DRAFT_SAVE",
+		OpArcMailDraftDelete:           "ARCMAIL_DRAFT_DELETE",
+		OpArcMailCryptoImportKey:       "ARCMAIL_CRYPTO_IMPORT_KEY",
+		OpArcMailCryptoListKeys:        "ARCMAIL_CRYPTO_LIST_KEYS",
+		OpArcMailCryptoDeleteKey:       "ARCMAIL_CRYPTO_DELETE_KEY",
+		OpArcMailCryptoSetTrust:        "ARCMAIL_CRYPTO_SET_TRUST",
+		OpArcMailCryptoRecipientStatus: "ARCMAIL_CRYPTO_RECIPIENT_STATUS",
+		OpArcMailEvent:                 "ARCMAIL_EVENT",
 	})
 }
 
