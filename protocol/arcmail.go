@@ -8,7 +8,7 @@ package protocol
 // precedent rather than squatting in an already-assigned range. See
 // draft-myclerk-arcmail (the dedicated ArcMail section of the MyClerk Protocol).
 // Sub-blocks: 0x310x Accounts, 0x311x Mailboxes, 0x312x Messages, 0x313x Outbox,
-// 0x314x Identities, 0x315x Drafts, 0x316x Crypto.
+// 0x314x Identities, 0x315x Drafts, 0x316x Crypto, 0x317x Quarantine.
 const (
 	// Accounts (0x310x).
 	OpArcMailAccountList OpCode = 0x3101 // Accounts.List
@@ -46,6 +46,11 @@ const (
 	OpArcMailCryptoSetTrust        OpCode = 0x3163 // Crypto.SetCertTrust (mark an S/MIME cert user-trusted, D-10-19)
 	OpArcMailCryptoRecipientStatus OpCode = 0x3164 // Crypto.RecipientKeyStatus (per-recipient encryption-key availability, D-10-21)
 
+	// Quarantine (0x317x): malware attachments retained for inspection/release (D-10-23).
+	OpArcMailQuarantineList    OpCode = 0x3170 // Quarantine.List (enumerate quarantined attachments)
+	OpArcMailQuarantineRelease OpCode = 0x3171 // Quarantine.Release (return a quarantined attachment's withheld bytes)
+	OpArcMailQuarantineDelete  OpCode = 0x3172 // Quarantine.Delete (discard a quarantined attachment)
+
 	// Transport control (0x31Fx).
 	OpArcMailEvent OpCode = 0x31F0 // Server->client push event (carries no ExtReplyTo)
 )
@@ -74,6 +79,9 @@ func init() {
 		OpArcMailCryptoDeleteKey:       "ARCMAIL_CRYPTO_DELETE_KEY",
 		OpArcMailCryptoSetTrust:        "ARCMAIL_CRYPTO_SET_TRUST",
 		OpArcMailCryptoRecipientStatus: "ARCMAIL_CRYPTO_RECIPIENT_STATUS",
+		OpArcMailQuarantineList:        "ARCMAIL_QUARANTINE_LIST",
+		OpArcMailQuarantineRelease:     "ARCMAIL_QUARANTINE_RELEASE",
+		OpArcMailQuarantineDelete:      "ARCMAIL_QUARANTINE_DELETE",
 		OpArcMailEvent:                 "ARCMAIL_EVENT",
 	})
 }
