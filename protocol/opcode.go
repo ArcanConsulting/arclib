@@ -77,9 +77,9 @@ func (op OpCode) String() string {
 	return fmt.Sprintf("0x%04X", uint16(op))
 }
 
-// Category extracts the category byte (high byte) from the opcode.
-func (op OpCode) Category() uint8 {
-	return uint8((op >> 8) & 0xFF)
+// Category extracts the category (high byte) from the opcode.
+func (op OpCode) Category() Category {
+	return Category((op >> 8) & 0xFF)
 }
 
 // Operation extracts the operation byte (low byte) from the opcode.
@@ -88,7 +88,7 @@ func (op OpCode) Operation() uint8 {
 }
 
 // NewOpCode creates an opcode from a category and operation number.
-func NewOpCode(category, operation uint8) OpCode {
+func NewOpCode(category Category, operation uint8) OpCode {
 	return OpCode(uint16(category)<<8 | uint16(operation))
 }
 

@@ -43,7 +43,7 @@ func TestOpCodeStringUnknown(t *testing.T) {
 func TestOpCodeCategory(t *testing.T) {
 	tests := []struct {
 		op       OpCode
-		category uint8
+		category Category
 	}{
 		{OpNop, 0x00},
 		{OpError, 0x00},

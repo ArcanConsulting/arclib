@@ -245,7 +245,7 @@ func TestGenerateProtocolVectors(t *testing.T) {
 		vectors.OpCodes = append(vectors.OpCodes, opcodeVector{
 			Code:     uint16(op),
 			Name:     op.String(),
-			Category: op.Category(),
+			Category: uint8(op.Category()),
 			Op:       op.Operation(),
 		})
 	}
