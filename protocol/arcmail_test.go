@@ -17,6 +17,7 @@ func TestArcMailOpCodesRegistered(t *testing.T) {
 		{OpArcMailCryptoImportKey, "ARCMAIL_CRYPTO_IMPORT_KEY"},
 		{OpArcMailCryptoListKeys, "ARCMAIL_CRYPTO_LIST_KEYS"},
 		{OpArcMailCryptoDeleteKey, "ARCMAIL_CRYPTO_DELETE_KEY"},
+		{OpArcMailCryptoDiscoverKeys, "ARCMAIL_CRYPTO_DISCOVER_KEYS"},
 		{OpArcMailQuarantineList, "ARCMAIL_QUARANTINE_LIST"},
 		{OpArcMailQuarantineRelease, "ARCMAIL_QUARANTINE_RELEASE"},
 		{OpArcMailQuarantineDelete, "ARCMAIL_QUARANTINE_DELETE"},

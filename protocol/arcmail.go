@@ -45,6 +45,7 @@ const (
 	OpArcMailCryptoDeleteKey       OpCode = 0x3162 // Crypto.DeleteKey (remove a key by fingerprint, D-10-13)
 	OpArcMailCryptoSetTrust        OpCode = 0x3163 // Crypto.SetCertTrust (mark an S/MIME cert user-trusted, D-10-19)
 	OpArcMailCryptoRecipientStatus OpCode = 0x3164 // Crypto.RecipientKeyStatus (per-recipient encryption-key availability, D-10-21)
+	OpArcMailCryptoDiscoverKeys    OpCode = 0x3165 // Crypto.DiscoverKeys (fetch missing correspondent keys: GnuPG/WKD/keyserver/Autocrypt, D-10-24/D-10-2)
 
 	// Quarantine (0x317x): malware attachments retained for inspection/release (D-10-23).
 	OpArcMailQuarantineList    OpCode = 0x3170 // Quarantine.List (enumerate quarantined attachments)
@@ -79,6 +80,7 @@ func init() {
 		OpArcMailCryptoDeleteKey:       "ARCMAIL_CRYPTO_DELETE_KEY",
 		OpArcMailCryptoSetTrust:        "ARCMAIL_CRYPTO_SET_TRUST",
 		OpArcMailCryptoRecipientStatus: "ARCMAIL_CRYPTO_RECIPIENT_STATUS",
+		OpArcMailCryptoDiscoverKeys:    "ARCMAIL_CRYPTO_DISCOVER_KEYS",
 		OpArcMailQuarantineList:        "ARCMAIL_QUARANTINE_LIST",
 		OpArcMailQuarantineRelease:     "ARCMAIL_QUARANTINE_RELEASE",
 		OpArcMailQuarantineDelete:      "ARCMAIL_QUARANTINE_DELETE",
