@@ -1,4 +1,4 @@
-// Code generated from internal/protocol/opcode.go; DO NOT EDIT.
+// MyClerk opcode catalog (canonical reference in arclib; apps copy locally, see cmd/opcode-verify).
 // Migrated MyClerk market data operation codes (category 0x30).
 
 package protocol
