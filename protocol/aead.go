@@ -206,9 +206,9 @@ func (s *AeadSession) checkRecvSeq(seq uint32) error {
 func deriveNonce(seed [crypto.NonceSize]byte, seq uint32) []byte {
 	n := make([]byte, crypto.NonceSize)
 	copy(n, seed[:])
-	n[0] ^= byte(seq >> 24)
-	n[1] ^= byte(seq >> 16)
-	n[2] ^= byte(seq >> 8)
-	n[3] ^= byte(seq)
+	n[0] ^= byte((seq >> 24) & 0xFF)
+	n[1] ^= byte((seq >> 16) & 0xFF)
+	n[2] ^= byte((seq >> 8) & 0xFF)
+	n[3] ^= byte(seq & 0xFF)
 	return n
 }
