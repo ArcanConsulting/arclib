@@ -25,11 +25,18 @@ const (
 
 // ChatMessage is a single message in a conversation.
 type ChatMessage struct {
-	Role       string     `msgpack:"role"`
-	Content    string     `msgpack:"content,omitempty"`
-	Name       string     `msgpack:"name,omitempty"`
-	ToolCallID string     `msgpack:"tcid,omitempty"`       // set when Role == RoleTool
-	ToolCalls  []ToolCall `msgpack:"tool_calls,omitempty"` // set when Role == RoleAssistant
+	Role string `msgpack:"role"`
+	// Content is the answer text. For reasoning models it may be empty when the
+	// model put its answer in ReasoningContent instead — callers that only need
+	// the answer should fall back to ReasoningContent when Content is empty.
+	Content string `msgpack:"content,omitempty"`
+	// ReasoningContent is the model's "thinking" channel (response only). It is
+	// forwarded so callers can show progress or recover an answer that landed
+	// here. Empty for models that don't expose reasoning.
+	ReasoningContent string     `msgpack:"reasoning,omitempty"`
+	Name             string     `msgpack:"name,omitempty"`
+	ToolCallID       string     `msgpack:"tcid,omitempty"`       // set when Role == RoleTool
+	ToolCalls        []ToolCall `msgpack:"tool_calls,omitempty"` // set when Role == RoleAssistant
 }
 
 // ToolCall is a function call requested by the model.

@@ -74,11 +74,12 @@ func New(baseURL string, opts ...Option) *Client {
 // --- OpenAI wire types -----------------------------------------------------
 
 type wireMessage struct {
-	Role       string         `json:"role"`
-	Content    string         `json:"content,omitempty"`
-	Name       string         `json:"name,omitempty"`
-	ToolCallID string         `json:"tool_call_id,omitempty"`
-	ToolCalls  []wireToolCall `json:"tool_calls,omitempty"`
+	Role             string         `json:"role"`
+	Content          string         `json:"content,omitempty"`
+	ReasoningContent string         `json:"reasoning_content,omitempty"`
+	Name             string         `json:"name,omitempty"`
+	ToolCallID       string         `json:"tool_call_id,omitempty"`
+	ToolCalls        []wireToolCall `json:"tool_calls,omitempty"`
 }
 
 type wireToolCall struct {
@@ -207,7 +208,7 @@ func (c *Client) ChatStream(ctx context.Context, req llm.ChatRequest, fn func(ll
 			finish = finishReason(choice.FinishReason, choice.Delta.ToolCalls)
 		}
 		delta := choice.Delta
-		if delta.Content == "" && len(delta.ToolCalls) == 0 {
+		if delta.Content == "" && delta.ReasoningContent == "" && len(delta.ToolCalls) == 0 {
 			continue
 		}
 		if err := fn(llm.StreamChunk{Delta: toLLMMessage(delta)}); err != nil {
@@ -410,7 +411,7 @@ func finishReason(reason string, toolCalls []wireToolCall) string {
 }
 
 func toLLMMessage(m wireMessage) llm.ChatMessage {
-	out := llm.ChatMessage{Role: m.Role, Content: m.Content, Name: m.Name, ToolCallID: m.ToolCallID}
+	out := llm.ChatMessage{Role: m.Role, Content: m.Content, ReasoningContent: m.ReasoningContent, Name: m.Name, ToolCallID: m.ToolCallID}
 	for _, tc := range m.ToolCalls {
 		out.ToolCalls = append(out.ToolCalls, llm.ToolCall{
 			ID:       tc.ID,
