@@ -9,7 +9,7 @@ package protocol
 // draft-myclerk-arcmail (the dedicated ArcMail section of the MyClerk Protocol).
 // Sub-blocks: 0x310x Accounts, 0x311x Mailboxes, 0x312x Messages, 0x313x Outbox,
 // 0x314x Identities, 0x315x Drafts, 0x316x Crypto, 0x317x Quarantine, 0x318x SmartFolders,
-// 0x319x Tags.
+// 0x319x Tags, 0x31Ax Sieve.
 const (
 	// Accounts (0x310x).
 	OpArcMailAccountList OpCode = 0x3101 // Accounts.List
@@ -65,6 +65,14 @@ const (
 	OpArcMailTagRemove   OpCode = 0x3192 // Tags.Remove (detach a keyword from a message)
 	OpArcMailTagSetColor OpCode = 0x3193 // Tags.SetColor (set a tag's local colour token)
 
+	// Sieve (0x31Ax): server-side filter scripts over ManageSieve (RFC 5804, D-9-1).
+	OpArcMailSieveList      OpCode = 0x31A0 // Sieve.List (enumerate an account's scripts + active)
+	OpArcMailSieveGet       OpCode = 0x31A1 // Sieve.Get (fetch a script's body)
+	OpArcMailSievePut       OpCode = 0x31A2 // Sieve.Put (create/replace a script; server compiles)
+	OpArcMailSieveSetActive OpCode = 0x31A3 // Sieve.SetActive (activate a script, or deactivate all)
+	OpArcMailSieveDelete    OpCode = 0x31A4 // Sieve.Delete (remove a script)
+	OpArcMailSieveCheck     OpCode = 0x31A5 // Sieve.Check (validate syntax without storing)
+
 	// Transport control (0x31Fx).
 	OpArcMailEvent OpCode = 0x31F0 // Server->client push event (carries no ExtReplyTo)
 )
@@ -105,6 +113,12 @@ func init() {
 		OpArcMailTagAdd:                "ARCMAIL_TAG_ADD",
 		OpArcMailTagRemove:             "ARCMAIL_TAG_REMOVE",
 		OpArcMailTagSetColor:           "ARCMAIL_TAG_SET_COLOR",
+		OpArcMailSieveList:             "ARCMAIL_SIEVE_LIST",
+		OpArcMailSieveGet:              "ARCMAIL_SIEVE_GET",
+		OpArcMailSievePut:              "ARCMAIL_SIEVE_PUT",
+		OpArcMailSieveSetActive:        "ARCMAIL_SIEVE_SET_ACTIVE",
+		OpArcMailSieveDelete:           "ARCMAIL_SIEVE_DELETE",
+		OpArcMailSieveCheck:            "ARCMAIL_SIEVE_CHECK",
 		OpArcMailEvent:                 "ARCMAIL_EVENT",
 	})
 }
