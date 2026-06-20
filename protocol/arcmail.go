@@ -72,6 +72,9 @@ const (
 	OpArcMailSieveSetActive OpCode = 0x31A3 // Sieve.SetActive (activate a script, or deactivate all)
 	OpArcMailSieveDelete    OpCode = 0x31A4 // Sieve.Delete (remove a script)
 	OpArcMailSieveCheck     OpCode = 0x31A5 // Sieve.Check (validate syntax without storing)
+	OpArcMailSieveBlock     OpCode = 0x31A6 // Sieve.Block (spam-block a sender, D-9-4)
+	OpArcMailSieveUnblock   OpCode = 0x31A7 // Sieve.Unblock (remove a blocked sender)
+	OpArcMailSieveBlocked   OpCode = 0x31A8 // Sieve.ListBlocked (the managed block list)
 
 	// Rules (0x31Bx): client-side filter rules evaluated in the core on new mail
 	// post-sync (D-9-5).
@@ -125,6 +128,9 @@ func init() {
 		OpArcMailSieveSetActive:        "ARCMAIL_SIEVE_SET_ACTIVE",
 		OpArcMailSieveDelete:           "ARCMAIL_SIEVE_DELETE",
 		OpArcMailSieveCheck:            "ARCMAIL_SIEVE_CHECK",
+		OpArcMailSieveBlock:            "ARCMAIL_SIEVE_BLOCK",
+		OpArcMailSieveUnblock:          "ARCMAIL_SIEVE_UNBLOCK",
+		OpArcMailSieveBlocked:          "ARCMAIL_SIEVE_BLOCKED",
 		OpArcMailRuleList:              "ARCMAIL_RULE_LIST",
 		OpArcMailRuleSave:              "ARCMAIL_RULE_SAVE",
 		OpArcMailRuleDelete:            "ARCMAIL_RULE_DELETE",
