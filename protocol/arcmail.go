@@ -9,7 +9,7 @@ package protocol
 // draft-myclerk-arcmail (the dedicated ArcMail section of the MyClerk Protocol).
 // Sub-blocks: 0x310x Accounts, 0x311x Mailboxes, 0x312x Messages, 0x313x Outbox,
 // 0x314x Identities, 0x315x Drafts, 0x316x Crypto, 0x317x Quarantine, 0x318x SmartFolders,
-// 0x319x Tags, 0x31Ax Sieve.
+// 0x319x Tags, 0x31Ax Sieve, 0x31Bx Rules.
 const (
 	// Accounts (0x310x).
 	OpArcMailAccountList OpCode = 0x3101 // Accounts.List
@@ -73,6 +73,12 @@ const (
 	OpArcMailSieveDelete    OpCode = 0x31A4 // Sieve.Delete (remove a script)
 	OpArcMailSieveCheck     OpCode = 0x31A5 // Sieve.Check (validate syntax without storing)
 
+	// Rules (0x31Bx): client-side filter rules evaluated in the core on new mail
+	// post-sync (D-9-5).
+	OpArcMailRuleList   OpCode = 0x31B0 // Rules.List (enumerate an account's rules)
+	OpArcMailRuleSave   OpCode = 0x31B1 // Rules.Save (create/replace a rule)
+	OpArcMailRuleDelete OpCode = 0x31B2 // Rules.Delete (remove a rule)
+
 	// Transport control (0x31Fx).
 	OpArcMailEvent OpCode = 0x31F0 // Server->client push event (carries no ExtReplyTo)
 )
@@ -119,6 +125,9 @@ func init() {
 		OpArcMailSieveSetActive:        "ARCMAIL_SIEVE_SET_ACTIVE",
 		OpArcMailSieveDelete:           "ARCMAIL_SIEVE_DELETE",
 		OpArcMailSieveCheck:            "ARCMAIL_SIEVE_CHECK",
+		OpArcMailRuleList:              "ARCMAIL_RULE_LIST",
+		OpArcMailRuleSave:              "ARCMAIL_RULE_SAVE",
+		OpArcMailRuleDelete:            "ARCMAIL_RULE_DELETE",
 		OpArcMailEvent:                 "ARCMAIL_EVENT",
 	})
 }
