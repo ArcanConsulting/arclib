@@ -8,7 +8,8 @@ package protocol
 // precedent rather than squatting in an already-assigned range. See
 // draft-myclerk-arcmail (the dedicated ArcMail section of the MyClerk Protocol).
 // Sub-blocks: 0x310x Accounts, 0x311x Mailboxes, 0x312x Messages, 0x313x Outbox,
-// 0x314x Identities, 0x315x Drafts, 0x316x Crypto, 0x317x Quarantine, 0x318x SmartFolders.
+// 0x314x Identities, 0x315x Drafts, 0x316x Crypto, 0x317x Quarantine, 0x318x SmartFolders,
+// 0x319x Tags.
 const (
 	// Accounts (0x310x).
 	OpArcMailAccountList OpCode = 0x3101 // Accounts.List
@@ -58,6 +59,12 @@ const (
 	OpArcMailSmartFolderSave   OpCode = 0x3181 // SmartFolders.Save (create/update a saved search by name)
 	OpArcMailSmartFolderDelete OpCode = 0x3182 // SmartFolders.Delete (remove a saved search)
 
+	// Tags (0x319x): colour-coded IMAP keywords, multiple per message (D-9-2).
+	OpArcMailTagList     OpCode = 0x3190 // Tags.List (enumerate an account's tags + colours)
+	OpArcMailTagAdd      OpCode = 0x3191 // Tags.Add (attach a keyword to a message, write-through)
+	OpArcMailTagRemove   OpCode = 0x3192 // Tags.Remove (detach a keyword from a message)
+	OpArcMailTagSetColor OpCode = 0x3193 // Tags.SetColor (set a tag's local colour token)
+
 	// Transport control (0x31Fx).
 	OpArcMailEvent OpCode = 0x31F0 // Server->client push event (carries no ExtReplyTo)
 )
@@ -94,6 +101,10 @@ func init() {
 		OpArcMailSmartFolderList:       "ARCMAIL_SMARTFOLDER_LIST",
 		OpArcMailSmartFolderSave:       "ARCMAIL_SMARTFOLDER_SAVE",
 		OpArcMailSmartFolderDelete:     "ARCMAIL_SMARTFOLDER_DELETE",
+		OpArcMailTagList:               "ARCMAIL_TAG_LIST",
+		OpArcMailTagAdd:                "ARCMAIL_TAG_ADD",
+		OpArcMailTagRemove:             "ARCMAIL_TAG_REMOVE",
+		OpArcMailTagSetColor:           "ARCMAIL_TAG_SET_COLOR",
 		OpArcMailEvent:                 "ARCMAIL_EVENT",
 	})
 }
