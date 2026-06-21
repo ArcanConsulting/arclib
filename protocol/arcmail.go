@@ -87,6 +87,16 @@ const (
 	OpArcMailRuleSave   OpCode = 0x31B1 // Rules.Save (create/replace a rule)
 	OpArcMailRuleDelete OpCode = 0x31B2 // Rules.Delete (remove a rule)
 
+	// Contacts (0x31Cx): Nextcloud/CardDAV address books — synced contacts for
+	// compose autocomplete and a contacts manager (D-11-1/D-11-4).
+	OpArcMailContactAccounts OpCode = 0x31C0 // Contacts.Accounts (configured Nextcloud accounts)
+	OpArcMailContactList     OpCode = 0x31C1 // Contacts.List (an account's contacts)
+	OpArcMailContactSearch   OpCode = 0x31C2 // Contacts.Search (autocomplete across accounts)
+	OpArcMailContactGet      OpCode = 0x31C3 // Contacts.Get (one contact, with photo)
+	OpArcMailContactUpsert   OpCode = 0x31C4 // Contacts.Upsert (create/update, write-through)
+	OpArcMailContactDelete   OpCode = 0x31C5 // Contacts.Delete (remove, write-through)
+	OpArcMailContactSync     OpCode = 0x31C6 // Contacts.Sync (pull changes from the server)
+
 	// Transport control (0x31Fx).
 	OpArcMailEvent OpCode = 0x31F0 // Server->client push event (carries no ExtReplyTo)
 )
@@ -144,6 +154,13 @@ func init() {
 		OpArcMailRuleList:              "ARCMAIL_RULE_LIST",
 		OpArcMailRuleSave:              "ARCMAIL_RULE_SAVE",
 		OpArcMailRuleDelete:            "ARCMAIL_RULE_DELETE",
+		OpArcMailContactAccounts:       "ARCMAIL_CONTACT_ACCOUNTS",
+		OpArcMailContactList:           "ARCMAIL_CONTACT_LIST",
+		OpArcMailContactSearch:         "ARCMAIL_CONTACT_SEARCH",
+		OpArcMailContactGet:            "ARCMAIL_CONTACT_GET",
+		OpArcMailContactUpsert:         "ARCMAIL_CONTACT_UPSERT",
+		OpArcMailContactDelete:         "ARCMAIL_CONTACT_DELETE",
+		OpArcMailContactSync:           "ARCMAIL_CONTACT_SYNC",
 		OpArcMailEvent:                 "ARCMAIL_EVENT",
 	})
 }
