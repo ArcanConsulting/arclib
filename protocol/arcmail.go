@@ -31,6 +31,7 @@ const (
 	OpArcMailMessageSetFollowUp OpCode = 0x312A // Messages.SetFollowUp (reminder, D-9-3)
 	OpArcMailMessageClearFollow OpCode = 0x312B // Messages.ClearFollowUp (D-9-3)
 	OpArcMailMessageFollowUps   OpCode = 0x312C // Messages.ListFollowUps (D-9-3)
+	OpArcMailMessageSenderImage OpCode = 0x312D // Messages.SenderImage (avatar: contact photo / BIMI, D-7-4)
 
 	// Outbox (0x313x): the send queue (D-8-3).
 	OpArcMailOutboxSend   OpCode = 0x3130 // Outbox.Send (enqueue an outgoing message)
@@ -118,6 +119,7 @@ func init() {
 		OpArcMailMessageSetFollowUp:    "ARCMAIL_MESSAGE_SET_FOLLOWUP",
 		OpArcMailMessageClearFollow:    "ARCMAIL_MESSAGE_CLEAR_FOLLOWUP",
 		OpArcMailMessageFollowUps:      "ARCMAIL_MESSAGE_LIST_FOLLOWUPS",
+		OpArcMailMessageSenderImage:    "ARCMAIL_MESSAGE_SENDER_IMAGE",
 		OpArcMailOutboxSend:            "ARCMAIL_OUTBOX_SEND",
 		OpArcMailOutboxList:            "ARCMAIL_OUTBOX_LIST",
 		OpArcMailOutboxRetry:           "ARCMAIL_OUTBOX_RETRY",
