@@ -26,6 +26,11 @@ const (
 	OpArcMailMessageAttachments OpCode = 0x3125 // Messages.Attachments (forward, D-8-11)
 	OpArcMailMessageAttachment  OpCode = 0x3126 // Messages.Attachment (open one + scan, D-10-5)
 	OpArcMailMessageSearch      OpCode = 0x3127 // Messages.Search (FTS5 full-text search, D-6-5)
+	OpArcMailMessageBulkFlag    OpCode = 0x3128 // Messages.BulkFlag (bulk mark/flag, D-9-3)
+	OpArcMailMessageDelete      OpCode = 0x3129 // Messages.Delete (bulk delete, D-9-3)
+	OpArcMailMessageSetFollowUp OpCode = 0x312A // Messages.SetFollowUp (reminder, D-9-3)
+	OpArcMailMessageClearFollow OpCode = 0x312B // Messages.ClearFollowUp (D-9-3)
+	OpArcMailMessageFollowUps   OpCode = 0x312C // Messages.ListFollowUps (D-9-3)
 
 	// Outbox (0x313x): the send queue (D-8-3).
 	OpArcMailOutboxSend   OpCode = 0x3130 // Outbox.Send (enqueue an outgoing message)
@@ -98,6 +103,11 @@ func init() {
 		OpArcMailMessageAttachments:    "ARCMAIL_MESSAGE_ATTACHMENTS",
 		OpArcMailMessageAttachment:     "ARCMAIL_MESSAGE_ATTACHMENT",
 		OpArcMailMessageSearch:         "ARCMAIL_MESSAGE_SEARCH",
+		OpArcMailMessageBulkFlag:       "ARCMAIL_MESSAGE_BULKFLAG",
+		OpArcMailMessageDelete:         "ARCMAIL_MESSAGE_DELETE",
+		OpArcMailMessageSetFollowUp:    "ARCMAIL_MESSAGE_SET_FOLLOWUP",
+		OpArcMailMessageClearFollow:    "ARCMAIL_MESSAGE_CLEAR_FOLLOWUP",
+		OpArcMailMessageFollowUps:      "ARCMAIL_MESSAGE_LIST_FOLLOWUPS",
 		OpArcMailOutboxSend:            "ARCMAIL_OUTBOX_SEND",
 		OpArcMailOutboxList:            "ARCMAIL_OUTBOX_LIST",
 		OpArcMailOutboxRetry:           "ARCMAIL_OUTBOX_RETRY",
