@@ -98,6 +98,14 @@ const (
 	OpArcMailContactDelete   OpCode = 0x31C5 // Contacts.Delete (remove, write-through)
 	OpArcMailContactSync     OpCode = 0x31C6 // Contacts.Sync (pull changes from the server)
 
+	// Files (0x31Dx): Nextcloud files over WebDAV + non-public shares over OCS (D-15).
+	OpArcMailFileList     OpCode = 0x31D0 // Files.List (a directory's entries)
+	OpArcMailFileDownload OpCode = 0x31D1 // Files.Download (fetch a file's bytes)
+	OpArcMailFileUpload   OpCode = 0x31D2 // Files.Upload (create/overwrite a file)
+	OpArcMailFileMkdir    OpCode = 0x31D3 // Files.Mkdir (create a folder)
+	OpArcMailFileDelete   OpCode = 0x31D4 // Files.Delete (remove a file/folder)
+	OpArcMailFileShare    OpCode = 0x31D5 // Files.Share (create a non-public share)
+
 	// Transport control (0x31Fx).
 	OpArcMailEvent OpCode = 0x31F0 // Server->client push event (carries no ExtReplyTo)
 )
@@ -163,6 +171,12 @@ func init() {
 		OpArcMailContactUpsert:         "ARCMAIL_CONTACT_UPSERT",
 		OpArcMailContactDelete:         "ARCMAIL_CONTACT_DELETE",
 		OpArcMailContactSync:           "ARCMAIL_CONTACT_SYNC",
+		OpArcMailFileList:              "ARCMAIL_FILE_LIST",
+		OpArcMailFileDownload:          "ARCMAIL_FILE_DOWNLOAD",
+		OpArcMailFileUpload:            "ARCMAIL_FILE_UPLOAD",
+		OpArcMailFileMkdir:             "ARCMAIL_FILE_MKDIR",
+		OpArcMailFileDelete:            "ARCMAIL_FILE_DELETE",
+		OpArcMailFileShare:             "ARCMAIL_FILE_SHARE",
 		OpArcMailEvent:                 "ARCMAIL_EVENT",
 	})
 }
