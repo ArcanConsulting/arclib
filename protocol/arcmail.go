@@ -112,6 +112,8 @@ const (
 	OpArcMailEventCreate    OpCode = 0x31E2 // Calendar.CreateEvent
 	OpArcMailEventUpdate    OpCode = 0x31E3 // Calendar.UpdateEvent
 	OpArcMailEventDelete    OpCode = 0x31E4 // Calendar.DeleteEvent
+	OpArcMailCalendarInvite OpCode = 0x31E5 // Calendar.Invite (parse an iMIP invite from a mail message, D-17-3)
+	OpArcMailEventRespond   OpCode = 0x31E6 // Calendar.RespondInvite (RSVP: write event + send iMIP REPLY)
 
 	// Transport control (0x31Fx).
 	OpArcMailEvent OpCode = 0x31F0 // Server->client push event (carries no ExtReplyTo)
@@ -189,6 +191,8 @@ func init() {
 		OpArcMailEventCreate:           "ARCMAIL_EVENT_CREATE",
 		OpArcMailEventUpdate:           "ARCMAIL_EVENT_UPDATE",
 		OpArcMailEventDelete:           "ARCMAIL_EVENT_DELETE",
+		OpArcMailCalendarInvite:        "ARCMAIL_CALENDAR_INVITE",
+		OpArcMailEventRespond:          "ARCMAIL_EVENT_RESPOND",
 		OpArcMailEvent:                 "ARCMAIL_EVENT",
 	})
 }
