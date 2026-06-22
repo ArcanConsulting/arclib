@@ -105,6 +105,11 @@ const (
 	OpArcMailFileMkdir    OpCode = 0x31D3 // Files.Mkdir (create a folder)
 	OpArcMailFileDelete   OpCode = 0x31D4 // Files.Delete (remove a file/folder)
 	OpArcMailFileShare    OpCode = 0x31D5 // Files.Share (create a non-public share)
+	// Notes (0x31D6-): Nextcloud notes as WebDAV files, sharing the Files (WebDAV) block (D-11-3).
+	OpArcMailNoteList   OpCode = 0x31D6 // Notes.Notes (an account's notes, metadata)
+	OpArcMailNoteGet    OpCode = 0x31D7 // Notes.Note (one note with content)
+	OpArcMailNoteSave   OpCode = 0x31D8 // Notes.SaveNote (create/update, rename on title change)
+	OpArcMailNoteDelete OpCode = 0x31D9 // Notes.DeleteNote
 
 	// Calendar (0x31Ex): Nextcloud calendars over CalDAV (D-17).
 	OpArcMailCalendarList   OpCode = 0x31E0 // Calendar.Calendars (an account's calendars)
@@ -114,6 +119,12 @@ const (
 	OpArcMailEventDelete    OpCode = 0x31E4 // Calendar.DeleteEvent
 	OpArcMailCalendarInvite OpCode = 0x31E5 // Calendar.Invite (parse an iMIP invite from a mail message, D-17-3)
 	OpArcMailEventRespond   OpCode = 0x31E6 // Calendar.RespondInvite (RSVP: write event + send iMIP REPLY)
+	// Tasks (0x31E7-): Nextcloud tasks as VTODO, sharing the Calendar (CalDAV) block (D-11-3).
+	OpArcMailTaskLists  OpCode = 0x31E7 // Tasks.Lists (an account's task lists)
+	OpArcMailTaskList   OpCode = 0x31E8 // Tasks.Tasks (a list's tasks)
+	OpArcMailTaskCreate OpCode = 0x31E9 // Tasks.CreateTask
+	OpArcMailTaskUpdate OpCode = 0x31EA // Tasks.UpdateTask
+	OpArcMailTaskDelete OpCode = 0x31EB // Tasks.DeleteTask
 
 	// Transport control (0x31Fx).
 	OpArcMailEvent OpCode = 0x31F0 // Server->client push event (carries no ExtReplyTo)
@@ -186,6 +197,10 @@ func init() {
 		OpArcMailFileMkdir:             "ARCMAIL_FILE_MKDIR",
 		OpArcMailFileDelete:            "ARCMAIL_FILE_DELETE",
 		OpArcMailFileShare:             "ARCMAIL_FILE_SHARE",
+		OpArcMailNoteList:              "ARCMAIL_NOTE_LIST",
+		OpArcMailNoteGet:               "ARCMAIL_NOTE_GET",
+		OpArcMailNoteSave:              "ARCMAIL_NOTE_SAVE",
+		OpArcMailNoteDelete:            "ARCMAIL_NOTE_DELETE",
 		OpArcMailCalendarList:          "ARCMAIL_CALENDAR_LIST",
 		OpArcMailCalendarEvents:        "ARCMAIL_CALENDAR_EVENTS",
 		OpArcMailEventCreate:           "ARCMAIL_EVENT_CREATE",
@@ -193,6 +208,11 @@ func init() {
 		OpArcMailEventDelete:           "ARCMAIL_EVENT_DELETE",
 		OpArcMailCalendarInvite:        "ARCMAIL_CALENDAR_INVITE",
 		OpArcMailEventRespond:          "ARCMAIL_EVENT_RESPOND",
+		OpArcMailTaskLists:             "ARCMAIL_TASK_LISTS",
+		OpArcMailTaskList:              "ARCMAIL_TASK_LIST",
+		OpArcMailTaskCreate:            "ARCMAIL_TASK_CREATE",
+		OpArcMailTaskUpdate:            "ARCMAIL_TASK_UPDATE",
+		OpArcMailTaskDelete:            "ARCMAIL_TASK_DELETE",
 		OpArcMailEvent:                 "ARCMAIL_EVENT",
 	})
 }
