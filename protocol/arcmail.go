@@ -106,6 +106,13 @@ const (
 	OpArcMailFileDelete   OpCode = 0x31D4 // Files.Delete (remove a file/folder)
 	OpArcMailFileShare    OpCode = 0x31D5 // Files.Share (create a non-public share)
 
+	// Calendar (0x31Ex): Nextcloud calendars over CalDAV (D-17).
+	OpArcMailCalendarList   OpCode = 0x31E0 // Calendar.Calendars (an account's calendars)
+	OpArcMailCalendarEvents OpCode = 0x31E1 // Calendar.Events (events in a time window)
+	OpArcMailEventCreate    OpCode = 0x31E2 // Calendar.CreateEvent
+	OpArcMailEventUpdate    OpCode = 0x31E3 // Calendar.UpdateEvent
+	OpArcMailEventDelete    OpCode = 0x31E4 // Calendar.DeleteEvent
+
 	// Transport control (0x31Fx).
 	OpArcMailEvent OpCode = 0x31F0 // Server->client push event (carries no ExtReplyTo)
 )
@@ -177,6 +184,11 @@ func init() {
 		OpArcMailFileMkdir:             "ARCMAIL_FILE_MKDIR",
 		OpArcMailFileDelete:            "ARCMAIL_FILE_DELETE",
 		OpArcMailFileShare:             "ARCMAIL_FILE_SHARE",
+		OpArcMailCalendarList:          "ARCMAIL_CALENDAR_LIST",
+		OpArcMailCalendarEvents:        "ARCMAIL_CALENDAR_EVENTS",
+		OpArcMailEventCreate:           "ARCMAIL_EVENT_CREATE",
+		OpArcMailEventUpdate:           "ARCMAIL_EVENT_UPDATE",
+		OpArcMailEventDelete:           "ARCMAIL_EVENT_DELETE",
 		OpArcMailEvent:                 "ARCMAIL_EVENT",
 	})
 }
