@@ -65,11 +65,11 @@ const (
 	OpArcMailSmartFolderSave   OpCode = 0x3181 // SmartFolders.Save (create/update a saved search by name)
 	OpArcMailSmartFolderDelete OpCode = 0x3182 // SmartFolders.Delete (remove a saved search)
 
-	// Tags (0x319x): colour-coded IMAP keywords, multiple per message (D-9-2).
-	OpArcMailTagList     OpCode = 0x3190 // Tags.List (enumerate an account's tags + colours)
+	// Tags (0x319x): color-coded IMAP keywords, multiple per message (D-9-2).
+	OpArcMailTagList     OpCode = 0x3190 // Tags.List (enumerate an account's tags + colors)
 	OpArcMailTagAdd      OpCode = 0x3191 // Tags.Add (attach a keyword to a message, write-through)
 	OpArcMailTagRemove   OpCode = 0x3192 // Tags.Remove (detach a keyword from a message)
-	OpArcMailTagSetColor OpCode = 0x3193 // Tags.SetColor (set a tag's local colour token)
+	OpArcMailTagSetColor OpCode = 0x3193 // Tags.SetColor (set a tag's local color token)
 
 	// Sieve (0x31Ax): server-side filter scripts over ManageSieve (RFC 5804, D-9-1).
 	OpArcMailSieveList      OpCode = 0x31A0 // Sieve.List (enumerate an account's scripts + active)

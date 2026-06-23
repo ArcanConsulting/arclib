@@ -118,6 +118,29 @@ func NewAeadSession(sharedSecret, clientSalt, serverSalt []byte, isClient bool) 
 	return s, nil
 }
 
+// NewAeadSessionFromKeys builds a Tier-3 session directly from pre-derived
+// directional keys, nonce seeds and a session id — for example the output of an
+// authenticated key exchange (see handshake.go) rather than the static-key salt
+// exchange. sendKey/recvKey must be crypto.KeySize bytes. Callers are
+// responsible for deriving the material so that one endpoint's send key/seed is
+// the other's receive key/seed.
+func NewAeadSessionFromKeys(sessionID uint64, sendKey, recvKey []byte, sendSeed, recvSeed [crypto.NonceSize]byte) (*AeadSession, error) {
+	if len(sendKey) != crypto.KeySize || len(recvKey) != crypto.KeySize {
+		return nil, ErrSessionSecretSize
+	}
+	s := &AeadSession{sessionID: sessionID, lastRecvSeq: -1}
+	var err error
+	if s.sendAEAD, err = crypto.NewAEAD(sendKey); err != nil {
+		return nil, fmt.Errorf("protocol: send aead: %w", err)
+	}
+	if s.recvAEAD, err = crypto.NewAEAD(recvKey); err != nil {
+		return nil, fmt.Errorf("protocol: recv aead: %w", err)
+	}
+	s.sendSeed = sendSeed
+	s.recvSeed = recvSeed
+	return s, nil
+}
+
 // SessionID returns the session identifier both endpoints derived.
 func (s *AeadSession) SessionID() uint64 { return s.sessionID }
 

@@ -3,6 +3,7 @@ module arcan-it.de/arclib
 go 1.25.0
 
 require (
+	github.com/cloudflare/circl v1.6.3
 	github.com/go-sql-driver/mysql v1.10.0
 	github.com/go-webauthn/webauthn v0.17.2
 	github.com/gorilla/websocket v1.5.3

@@ -13,7 +13,7 @@ const SQLiteVFSKeySize = 32
 // Android uses for storage encryption), from a 32-byte key. It returns nil for
 // any other key length.
 //
-// This centralises the at-rest cipher choice in arclib ("all crypto via
+// This centralizes the at-rest cipher choice in arclib ("all crypto via
 // arclib"): a consumer plugs the returned cipher into a SQLite encrypting VFS
 // (e.g. the ncruces/go-sqlite3 adiantum VFS via its HBSHCreator hook) and owns
 // only the VFS plumbing, not the cipher. The construction is identical to that
