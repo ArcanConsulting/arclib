@@ -4,38 +4,43 @@ Shared foundation library for the Arc ecosystem.
 
 ## What is arclib?
 
-arclib provides common components used across Arc projects (ArcHub, MyClerk, ArcShell):
+arclib provides the common building blocks used across Arc projects (ArcHub, MyClerk, ArcShell, ArcMail):
 
-- **Crypto** — ChaCha20-Poly1305, HKDF-SHA256, X25519, ML-KEM-768 (post-quantum), ZSTD
-- **DB** — Database abstraction for PostgreSQL, SQLite, MariaDB/MySQL with encrypted fields
-- **Protocol** — MyClerk Protocol layer (tiers, sessions, fragmentation, VFS)
-- **And more** — Rate limiting, WebAuthn, JSON5, structured logging, config loader
+- **Crypto** — ChaCha20-Poly1305 (AEAD); X25519 and ML-KEM-768 (post-quantum) key exchange; Ed25519 and ML-DSA-65 (post-quantum) signatures; hybrid identity keys; HKDF-SHA256, X9.63-KDF, Argon2; HMAC-SHA256, SHA-256, CRC-16/32; key rotation and key wrapping; an at-rest SQLite cipher; ZSTD compression.
+- **Protocol** — the MyClerk Protocol layer: tiered message framing (tiers 0–5), opcodes/categories/extensions, fragmentation, a hybrid post-quantum handshake (X25519 + ML-KEM-768), Tier-5 sessions with automatic key rotation, and mutual identity authentication. MyClerk is published as an IETF Internet-Draft; arclib is its reference implementation.
+- **Transport** — MyClerk over WebSocket (sessions, handshake, dispatch).
+- **LLM** — a generic LLM-over-MyClerk contract plus Ollama and OpenAI-compatible clients.
+- **DB** — database abstraction for PostgreSQL, SQLite, MariaDB/MySQL with encrypted fields.
+- **And more** — rate limiting, WebAuthn/Passkeys, JSON5, structured logging, config loader, MessagePack.
 
-## Three Languages
+## Languages
 
-arclib is implemented in Go (reference), JavaScript, and Kotlin. All three pass against shared test vectors via cross-validation to guarantee byte-identical output.
+Go is the reference implementation; the Kotlin (`kt/`) and JavaScript/TypeScript (`js/`) mirrors
+track it against shared cross-validation test vectors for byte-identical output. The most recent
+additions (hybrid post-quantum handshake, Tier-5 sessions, identity authentication) land in Go
+first; the mirrors follow.
 
 ```
-go get arcan-it.de/arclib          # Go
-npm install @arcan/arclib           # JavaScript
-implementation 'de.arcan.arclib'    # Kotlin
+go get arcan-it.de/arclib
 ```
-
-## Status
-
-| Component | Go | JS | Kotlin |
-|-----------|----|----|--------|
-| Crypto (ChaCha20, HKDF, X25519, ML-KEM-768, HMAC, CRC, ZSTD) | Done | Done | Done |
-| DB Abstraction (PostgreSQL, SQLite, MariaDB, encrypted fields) | Done | — | — |
-| Protocol (tiers, codec, extensions, fragmentation, VFS) | Done | Done | Done |
-| Extras (rate limiter, JSON5, logging, config, msgpack, WebAuthn) | Done | — | — |
-
-Current version: **v1.3.0**
 
 ## Module path
 
-`arcan-it.de/arclib` — hosted on [GitHub](https://github.com/arcanconsulting/arclib)
+`arcan-it.de/arclib` — hosted on [GitHub](https://github.com/arcanconsulting/arclib).
+Current version: **v1.4.0**.
 
 ## License
 
-Apache 2.0
+arclib is dual-licensed:
+
+- The **`crypto/`** package is licensed under the **Apache License 2.0** (see
+  [`crypto/LICENSE`](crypto/LICENSE)) — permissively reusable.
+- **Everything else** is licensed under the **Business Source License 1.1** (see
+  [`LICENSE`](LICENSE)).
+
+Under BSL 1.1, production use is **free for organizations with annual revenue below
+EUR 1,000,000**; larger organizations require a commercial license. Each released version
+automatically converts to the **Apache License 2.0** four years after its release.
+
+The Business Source License is not an OSI-approved open-source license, but every version becomes
+Apache-2.0 on its change date. For commercial licensing, contact Arcan Consulting.
