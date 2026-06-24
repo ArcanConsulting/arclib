@@ -376,7 +376,8 @@ func (c *Client) get(ctx context.Context, path string) (io.ReadCloser, error) {
 }
 
 func (c *Client) do(req *http.Request) (io.ReadCloser, error) {
-	resp, err := c.hc.Do(req)
+	// The request URL is built from the operator-configured base URL, not input.
+	resp, err := c.hc.Do(req) //nolint:gosec // G704: base URL is operator-configured, not attacker input
 	if err != nil {
 		return nil, fmt.Errorf("ollama unreachable: %w", err)
 	}

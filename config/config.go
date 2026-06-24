@@ -50,7 +50,7 @@ func LoadWithDefaults(path string, target, defaults interface{}) error {
 // non-zero values. It returns an error listing the first missing required field.
 func Validate(v interface{}) error {
 	val := reflect.ValueOf(v)
-	if val.Kind() == reflect.Ptr {
+	if val.Kind() == reflect.Pointer {
 		val = val.Elem()
 	}
 	if val.Kind() != reflect.Struct {

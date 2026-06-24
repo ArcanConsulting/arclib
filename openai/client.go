@@ -174,55 +174,71 @@ func (c *Client) ChatStream(ctx context.Context, req llm.ChatRequest, fn func(ll
 	}
 	defer func() { _ = body.Close() }()
 
-	var (
-		usage  *llm.Usage
-		finish string
-	)
+	st := streamState{}
 	sc := bufio.NewScanner(body)
 	sc.Buffer(make([]byte, 0, 64*1024), 8<<20)
 	for sc.Scan() {
-		line := strings.TrimSpace(sc.Text())
-		if line == "" || !strings.HasPrefix(line, "data:") {
-			continue
+		stop, herr := handleStreamLine(strings.TrimSpace(sc.Text()), &st, fn)
+		if herr != nil {
+			return herr
 		}
-		data := strings.TrimSpace(strings.TrimPrefix(line, "data:"))
-		if data == "[DONE]" {
+		if stop {
 			break
-		}
-		var wr wireStreamResp
-		if err := json.Unmarshal([]byte(data), &wr); err != nil {
-			continue // tolerate keep-alive / non-JSON lines
-		}
-		if wr.Usage != nil {
-			usage = &llm.Usage{
-				PromptTokens:     wr.Usage.PromptTokens,
-				CompletionTokens: wr.Usage.CompletionTokens,
-				TotalTokens:      wr.Usage.TotalTokens,
-			}
-		}
-		if len(wr.Choices) == 0 {
-			continue
-		}
-		choice := wr.Choices[0]
-		if choice.FinishReason != "" {
-			finish = finishReason(choice.FinishReason, choice.Delta.ToolCalls)
-		}
-		delta := choice.Delta
-		if delta.Content == "" && delta.ReasoningContent == "" && len(delta.ToolCalls) == 0 {
-			continue
-		}
-		if err := fn(llm.StreamChunk{Delta: toLLMMessage(delta)}); err != nil {
-			return err
 		}
 	}
 	if err := sc.Err(); err != nil {
 		return fmt.Errorf("stream read: %w", err)
 	}
+	finish := st.finish
 	if finish == "" {
 		finish = llm.FinishStop
 	}
-	final := llm.StreamChunk{FinishReason: finish, Usage: usage, Done: true}
-	return fn(final)
+	return fn(llm.StreamChunk{FinishReason: finish, Usage: st.usage, Done: true})
+}
+
+// streamState accumulates usage and the finish reason across SSE lines.
+type streamState struct {
+	usage  *llm.Usage
+	finish string
+}
+
+// handleStreamLine parses one SSE line, forwarding a delta chunk via fn when the
+// line carries one. It returns stop=true on the "[DONE]" sentinel and propagates
+// fn's error; non-JSON/keep-alive lines are tolerated.
+func handleStreamLine(line string, st *streamState, fn func(llm.StreamChunk) error) (bool, error) {
+	if line == "" || !strings.HasPrefix(line, "data:") {
+		return false, nil
+	}
+	data := strings.TrimSpace(strings.TrimPrefix(line, "data:"))
+	if data == "[DONE]" {
+		return true, nil
+	}
+	var wr wireStreamResp
+	if err := json.Unmarshal([]byte(data), &wr); err != nil {
+		return false, nil //nolint:nilerr // tolerate keep-alive / non-JSON SSE lines
+	}
+	if wr.Usage != nil {
+		st.usage = &llm.Usage{
+			PromptTokens:     wr.Usage.PromptTokens,
+			CompletionTokens: wr.Usage.CompletionTokens,
+			TotalTokens:      wr.Usage.TotalTokens,
+		}
+	}
+	if len(wr.Choices) == 0 {
+		return false, nil
+	}
+	choice := wr.Choices[0]
+	if choice.FinishReason != "" {
+		st.finish = finishReason(choice.FinishReason, choice.Delta.ToolCalls)
+	}
+	delta := choice.Delta
+	if delta.Content == "" && delta.ReasoningContent == "" && len(delta.ToolCalls) == 0 {
+		return false, nil
+	}
+	if err := fn(llm.StreamChunk{Delta: toLLMMessage(delta)}); err != nil {
+		return false, err
+	}
+	return false, nil
 }
 
 func (c *Client) buildChatBody(req llm.ChatRequest, stream bool) map[string]any {
@@ -383,7 +399,9 @@ func (c *Client) do(req *http.Request) (io.ReadCloser, error) {
 	if c.apiKey != "" {
 		req.Header.Set("Authorization", "Bearer "+c.apiKey)
 	}
-	resp, err := c.hc.Do(req)
+	// The request URL is built from the operator-configured base URL (set at
+	// client construction), not from attacker-controlled input.
+	resp, err := c.hc.Do(req) //nolint:gosec // G704: base URL is operator-configured, not attacker input
 	if err != nil {
 		return nil, fmt.Errorf("openai unreachable: %w", err)
 	}
