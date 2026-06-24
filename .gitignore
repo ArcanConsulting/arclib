@@ -34,3 +34,7 @@ js/package-lock.json
 kt/.gradle/
 kt/build/
 kt/local.properties
+
+# Local / private — must not land in the public mirror
+CLAUDE.md
+/.gitea/
